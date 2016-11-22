@@ -71,5 +71,5 @@ case(4,8,'n').
 case(5,8,'n').
 case(6,8,'b').
 case(7,8,'b').
-case(8,8,'b').
+%%case(8,8,'b').
 %% for test %%
