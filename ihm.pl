@@ -1,9 +1,9 @@
-% :- dynamic case/3. % case(Ligne, Colonne, Valeur) avec Ligne et Colonne comprises entre 1 et 8 ; et Valeur est l'un de 'n', 'b', ' '.
 
-dspVal(L,C) :- case(L,C,'n'), write('?').
-dspVal(L,C) :- case(L,C,'b'), write('?').
-dspVal(L,C) :- case(L,C,' '), write(' ').
-printVal(L,C) :- case(L,C,V), nonvar(V), write(V);
+% Formatted, 'beautiful' display
+dspVal(C,L) :- case(C,L,'n'), write('●'). % Black coin
+dspVal(C,L) :- case(C,L,'b'), write('○'). % White coin
+dspVal(C,L) :- case(C,L,V), V \== 'n', V \== 'b', nonvar(V), write(' '). % Not black nor white: assume empty
+dspVal(C,L) :- not(case(C,L,_)), write(' '). % Square does not exist: assume empty
 
 displayBoard :-
     writeln('*------*'),
@@ -17,6 +17,11 @@ displayBoard :-
     dspVal(1,8), dspVal(2,8), dspVal(3,8), dspVal(4,8), dspVal(5,8), dspVal(6,8), dspVal(7,8), dspVal(8,8), writeln(''),
     writeln('*------*').
 
+
+% Unformatted display
+printVal(C,L) :- case(C,L,V), nonvar(V), write(V). % Simple output
+printVal(C,L) :- not(case(C,L,_)), write(' '). % Square does not exist: assume empty
+
 printBoard :-
     printVal(1,1), printVal(2,1), printVal(3,1), printVal(4,1), printVal(5,1), printVal(6,1), printVal(7,1), printVal(8,1), writeln(''),
     printVal(1,2), printVal(2,2), printVal(3,2), printVal(4,2), printVal(5,2), printVal(6,2), printVal(7,2), printVal(8,2), writeln(''),
@@ -25,4 +30,4 @@ printBoard :-
     printVal(1,5), printVal(2,5), printVal(3,5), printVal(4,5), printVal(5,5), printVal(6,5), printVal(7,5), printVal(8,5), writeln(''),
     printVal(1,6), printVal(2,6), printVal(3,6), printVal(4,6), printVal(5,6), printVal(6,6), printVal(7,6), printVal(8,6), writeln(''),
     printVal(1,7), printVal(2,7), printVal(3,7), printVal(4,7), printVal(5,7), printVal(6,7), printVal(7,7), printVal(8,7), writeln(''),
-    printVal(1,8), printVal(2,8), printVal(3,8), printVal(4,8), printVal(5,8), printVal(6,8), printVal(7,8), printVal(8,8), writeln('')
+    printVal(1,8), printVal(2,8), printVal(3,8), printVal(4,8), printVal(5,8), printVal(6,8), printVal(7,8), printVal(8,8), writeln('').
