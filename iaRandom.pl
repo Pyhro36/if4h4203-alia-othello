@@ -1,7 +1,7 @@
 :- consult(script).
 
 %% return the X and Y coordinates chosen y the player Player where he want to play.
-ia(X, Y, Player) :- randomMove(X, Y, Player).
+iaRandome(X, Y, Player) :- randomMove(X, Y, Player).
 
 caseLibre(X,Y) :- case(X2,Y2,_), contact(X2,Y2,X,Y), not(case(X,Y,_)), X > 0, X < 9, Y > 0, Y < 9.
 
