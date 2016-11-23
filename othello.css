@@ -15,3 +15,7 @@ canvas.coin {
 	border-width: 1px;
 	border-style: solid;
 }
+
+a {
+	color: #101010;
+}

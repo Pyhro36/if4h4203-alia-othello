@@ -7,6 +7,15 @@
 	<body>
 		<table id="board">
 		</table>
+		
+		<hr/>
+		
+		<p><a href="#" id="f5" onclick="displayBoard(), false;">Refresh board</a></p>
+		
+		<p><a href="#" id="play1" onclick="advanceState(), false;">Play one turn</a></p>
+		
+		<p><a href="#" id="playN" onclick="advanceStateNTimes(), false;">Play N turns&nbsp;: </a><input type="number" id="turnsNumber" min="1" value="1"/></p>
+		
 	</body>
 	
 	<!-- Let's load the JS libraries! -->
@@ -19,7 +28,9 @@
 		// A variable for testing the draw functions
 		var test = "                           bn      nb                           ";
 		
-		init();
-		drawBoard(retrieveBoard());
+		window.onload = function() {
+			init();
+			displayBoard();
+		}
 	</script>
 </html>
