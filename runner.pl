@@ -25,13 +25,15 @@ play(Player) :-  write('New turn for:'), writeln(Player),
             play(NextPlayer). % next turn!
 
 %%%% Play a Move, add a case in the list of predicates
-playMove(X, Y, Player) :- assert(case(X, Y, Player)), .
+playMove(X, Y, Player) :- assert(case(X, Y, Player)), reverseGauche(X, Y, Player).
 
 %%% reverse a case
 reverse(X, Y, Player) :- changePlayer(Player, OtherPlayer), retract(case(X,Y,OtherPlayer)), assert(case(X,Y,Player)).
 
+
+%%%% reverse all the cases à the left of the played case.
 reverseGauche(X, Y, Player) :- case(X, Y, Player).
-reverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseGauche(X2, Y2, Player), reverse(X,Y,Player).
+reverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseGauche(X2, Y2, Player), reverse(X,Y,Player).
 
 reverseDroite(X, Y, Player) :- case(X, Y, Player).
 reverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseDroite(X2, Y2, Player), reverse(X,Y,Player).
@@ -54,10 +56,8 @@ reverseHautDroite(X, Y, Player) :- contactHautDroite(X, Y, X2, Y2), changePlayer
 reverseBasDroite(X, Y, Player) :- case(X, Y, Player).
 reverseBasDroite(X, Y, Player) :- contactBasDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseBasDroite(X2, Y2, Player), reverse(X,Y,Player).
 
-
-init :- play()
-
+init :- play().
 
 %%%% Predicate to get the next player
-changePlayer('b',n').
+changePlayer('b','n').
 changePlayer('n','b').
