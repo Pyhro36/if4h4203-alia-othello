@@ -21,8 +21,8 @@ play(Player) :-  write('New turn for:'), writeln(Player),
        	    displayBoard, % print it
 			iaRandome(X, Y, Player), % ask the AI for a move, that is, an index for the Player 
     	    playMove(X, Y, Player), % Play the move and get the result in a new Board
-    	    changePlayer(Player,NextPlayer), % Change the player before next turn
-            play(NextPlayer). % next turn!
+    	    %% changePlayer(Player,NextPlayer), % Change the player before next turn
+            %% play(NextPlayer). % next turn!
 
 %%%% Play a Move, add a case in the list of predicates
 playMove(X, Y, Player) :- assert(case(X, Y, Player)), testReverseGauche(X, Y, Player), testReverseDroite(X, Y, Player), testReverseHaut(X, Y, Player), testReverseBas(X, Y, Player), testReverseHautGauche(X, Y, Player), testReverseHautDroite(X, Y, Player), testReverseBasGauche(X, Y, Player), testReverseBasDroite(X, Y, Player).
