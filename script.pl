@@ -3,8 +3,8 @@
 :- consult(ihm).
 
 case(4,4,'b').
-case(4,5,'n').
 case(5,4,'n').
+case(4,5,'b').
 case(5,5,'b').
 
 contact(X,Y,X2,Y2) :- contactGauche(X,Y,X2,Y2).
