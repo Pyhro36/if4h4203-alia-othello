@@ -8,13 +8,17 @@
 		<table id="board">
 		</table>
 		
+		<p id="winner"/>
+		
 		<hr/>
 		
 		<p><a href="#" id="f5" onclick="displayBoard(), false;">Refresh board</a></p>
 		
 		<p><a href="#" id="play1" onclick="advanceState(), false;">Play one turn</a></p>
 		
-		<p><a href="#" id="playN" onclick="advanceStateNTimes(), false;">Play N turns&nbsp;: </a><input type="number" id="turnsNumber" min="1" value="1"/></p>
+		<p><a href="#" id="playN" onclick="advanceStateNTimes(), false;">Play N turns&nbsp;:</a> <input type="number" id="turnsNumber" min="1" value="1"/></p>
+		
+		<p><a href="#" id="playTimed">Play every N seconds&nbsp;:</a> <input type="number" id="secondsNumber" min="1" value="1"/></p>
 		
 	</body>
 	
@@ -27,6 +31,23 @@
 	<script type="application/javascript">
 		// A variable for testing the draw functions
 		var test = "                           bn      nb                           ";
+		
+		var timer;
+		var timerActive = false;
+		
+		document.getElementById("playTimed").addEventListener("click", function(){
+			if (timerActive) {
+				clearInterval(timer);
+				document.getElementById("playTimed").innerHTML = "Play every N seconds&nbsp;: ";
+				document.getElementById("secondsNumber").display = "initial";
+				timerActive = false;
+			} else {
+				timer = setInterval(advanceState, document.getElementById("secondsNumber").value);
+				document.getElementById("playTimed").innerHTML = "Stop";
+				document.getElementById("secondsNumber").display = "none";
+				timerActive = false;
+			}
+		});
 		
 		window.onload = function() {
 			init();

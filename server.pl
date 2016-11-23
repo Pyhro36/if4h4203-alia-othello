@@ -39,10 +39,21 @@ startServer :- assert(currentPlayer('n')), server(8080).
 getBoardHttpHandler(_Request) :- format('Content-type: text/plain~n~n'), printBoard.
 
 playHandler(_Request) :-
+	gameover(X),
+	format('Content-type: text/plain~n~n'),
+	format(X).
+
+playHandler(_Request) :-
+	equality,
+	format('Content-type: text/plain~n~n'),
+	format('d').
+
+playHandler(_Request) :-
 	currentPlayer(X),
 	play(X),
 	switchPlayer,
-	format('Content-type: text/plain~n~n').
+	format('Content-type: text/plain~n~n'),
+	format('p').
 	
 playSeveralHandler(Request) :-
 	http_parameters(Request, [playCount(Count, [integer])]),

@@ -1,5 +1,6 @@
 body {
 	background-color: #ffcc66;
+	font-family: sans-serif;
 }
 
 table#board {
@@ -18,4 +19,10 @@ canvas.coin {
 
 a {
 	color: #101010;
+}
+
+p#winner {
+	display: none;
+	margin: auto;
+	font-size: 32pt;
 }
