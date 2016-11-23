@@ -1,7 +1,7 @@
 
 % Formatted, 'beautiful' display
-dspVal(C,L) :- case(C,L,'n'), write('●'). % Black coin
-dspVal(C,L) :- case(C,L,'b'), write('○'). % White coin
+dspVal(C,L) :- case(C,L,'n'), write('n'). % Black coin
+dspVal(C,L) :- case(C,L,'b'), write('b'). % White coin
 dspVal(C,L) :- case(C,L,V), V \== 'n', V \== 'b', nonvar(V), write(' '). % Not black nor white: assume empty
 dspVal(C,L) :- not(case(C,L,_)), write(' '). % Square does not exist: assume empty
 
@@ -20,7 +20,7 @@ displayBoard :-
 
 % Unformatted display
 printVal(C,L) :- case(C,L,V), nonvar(V), write(V). % Simple output
-printVal(C,L) :- not(case(C,L,_)), write(' '). % Square does not exist: assume empty
+printVal(C,L) :- not(case(C,L,_)), write('-'). % Square does not exist: assume empty
 
 printBoard :-
     printVal(1,1), printVal(2,1), printVal(3,1), printVal(4,1), printVal(5,1), printVal(6,1), printVal(7,1), printVal(8,1),

@@ -8,11 +8,18 @@
 		<table id="board">
 		</table>
 	</body>
+	
+	<!-- Let's load the JS libraries! -->
 	<script src="init.js" type="application/javascript"></script>
 	<script src="draw.js" type="application/javascript"></script>
+	<script src="ajax.js" type="application/javascript"></script>
+	
+	<!-- And now for the actual JS running script -->
 	<script type="application/javascript">
+		// A variable for testing the draw functions
 		var test = "                           bn      nb                           ";
+		
 		init();
-		drawBoard(test);
+		drawBoard(retrieveBoard());
 	</script>
 </html>
