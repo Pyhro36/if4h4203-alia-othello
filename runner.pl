@@ -18,22 +18,28 @@ play(_) :- winner(Winner), !, write('Game is Over. Winner: '), writeln(Winner), 
 play(_) :- equality, !, write('Game is Over. EQUALITY'), displayBoard.
 % The game is not over, we play the next turn
 play(Player) :-  write('New turn for:'), writeln(Player),
-       	    displayBoard, % print it
+       	    printBoard, % print it
 			ia(X, Y, Player), % ask the AI for a move, that is, an index for the Player 
     	    playMove(X, Y, Player), % Play the move and get the result in a new Board
     	    changePlayer(Player,NextPlayer), % Change the player before next turn
             play(NextPlayer). % next turn!
 
 %%%% Play a Move, add a case in the list of predicates
-playMove(X, Y, Player) :- assert(case(X, Y, Player)), reverseGauche(X, Y, Player), reverseBasDroite(X, Y, Player).
+playMove(X, Y, Player) :- assert(case(X, Y, Player)). %% reverseGauche(X, Y, Player), reverseBasDroite(X, Y, Player).
 
 %%% reverse a case
 reverse(X, Y, Player) :- changePlayer(Player, OtherPlayer), retract(case(X,Y,OtherPlayer)), assert(case(X,Y,Player)).
 
-
 %%%% reverse all the cases à the left of the played case.
 reverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseGauche(X2, Y2, Player), reverse(X2,Y2,Player).
+
+
+%%%% don't reverse the cases
+reverseGauche(X, Y, Player) :- notreverseGauche(X, Y, Player).
+
+notreverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), vide(X2, Y2).
+notreverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), notreverseGauche(X2, Y2, Player)).
 
 reverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseDroite(X2, Y2, Player), reverse(X2,Y2,Player).
