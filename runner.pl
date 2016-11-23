@@ -18,7 +18,7 @@ play(_) :- winner(Winner), !, write('Game is Over. Winner: '), writeln(Winner), 
 play(_) :- equality, !, write('Game is Over. EQUALITY'), displayBoard.
 % The game is not over, we play the next turn
 play(Player) :-  write('New turn for:'), writeln(Player),
-       	    printBoard, % print it
+       	    displayBoard, % print it
 			ia(X, Y, Player), % ask the AI for a move, that is, an index for the Player 
     	    playMove(X, Y, Player), % Play the move and get the result in a new Board
     	    changePlayer(Player,NextPlayer), % Change the player before next turn
