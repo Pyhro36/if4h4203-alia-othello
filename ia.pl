@@ -3,4 +3,4 @@
 :- consult(script).
 
 %% return the X and Y coordinates chosen y the player Player where he want to play.
-ia(X, Y, Player) :- repeat, X is random(7), Y is random(7), not(caseLibre(X1,Y1)), X1 is X + 1, Y1 is Y + 1, !. 
+ia(X, Y, Player) :- randomMove(X, Y, PLayer). 
