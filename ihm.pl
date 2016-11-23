@@ -1,7 +1,7 @@
 
 % Formatted, 'beautiful' display
-dspVal(C,L) :- case(C,L,'n'), write('●'). % Black coin
-dspVal(C,L) :- case(C,L,'b'), write('○'). % White coin
+dspVal(C,L) :- case(C,L,'n'), write('n'). % Black coin
+dspVal(C,L) :- case(C,L,'b'), write('b'). % White coin
 dspVal(C,L) :- case(C,L,V), V \== 'n', V \== 'b', nonvar(V), write(' '). % Not black nor white: assume empty
 dspVal(C,L) :- not(case(C,L,_)), write(' '). % Square does not exist: assume empty
 
@@ -20,14 +20,14 @@ displayBoard :-
 
 % Unformatted display
 printVal(C,L) :- case(C,L,V), nonvar(V), write(V). % Simple output
-printVal(C,L) :- not(case(C,L,_)), write(' '). % Square does not exist: assume empty
+printVal(C,L) :- not(case(C,L,_)), write('-'). % Square does not exist: assume empty
 
 printBoard :-
-    printVal(1,1), printVal(2,1), printVal(3,1), printVal(4,1), printVal(5,1), printVal(6,1), printVal(7,1), printVal(8,1), writeln(''),
-    printVal(1,2), printVal(2,2), printVal(3,2), printVal(4,2), printVal(5,2), printVal(6,2), printVal(7,2), printVal(8,2), writeln(''),
-    printVal(1,3), printVal(2,3), printVal(3,3), printVal(4,3), printVal(5,3), printVal(6,3), printVal(7,3), printVal(8,3), writeln(''),
-    printVal(1,4), printVal(2,4), printVal(3,4), printVal(4,4), printVal(5,4), printVal(6,4), printVal(7,4), printVal(8,4), writeln(''),
-    printVal(1,5), printVal(2,5), printVal(3,5), printVal(4,5), printVal(5,5), printVal(6,5), printVal(7,5), printVal(8,5), writeln(''),
-    printVal(1,6), printVal(2,6), printVal(3,6), printVal(4,6), printVal(5,6), printVal(6,6), printVal(7,6), printVal(8,6), writeln(''),
-    printVal(1,7), printVal(2,7), printVal(3,7), printVal(4,7), printVal(5,7), printVal(6,7), printVal(7,7), printVal(8,7), writeln(''),
-    printVal(1,8), printVal(2,8), printVal(3,8), printVal(4,8), printVal(5,8), printVal(6,8), printVal(7,8), printVal(8,8), writeln('').
+    printVal(1,1), printVal(2,1), printVal(3,1), printVal(4,1), printVal(5,1), printVal(6,1), printVal(7,1), printVal(8,1),
+    printVal(1,2), printVal(2,2), printVal(3,2), printVal(4,2), printVal(5,2), printVal(6,2), printVal(7,2), printVal(8,2),
+    printVal(1,3), printVal(2,3), printVal(3,3), printVal(4,3), printVal(5,3), printVal(6,3), printVal(7,3), printVal(8,3),
+    printVal(1,4), printVal(2,4), printVal(3,4), printVal(4,4), printVal(5,4), printVal(6,4), printVal(7,4), printVal(8,4),
+    printVal(1,5), printVal(2,5), printVal(3,5), printVal(4,5), printVal(5,5), printVal(6,5), printVal(7,5), printVal(8,5),
+    printVal(1,6), printVal(2,6), printVal(3,6), printVal(4,6), printVal(5,6), printVal(6,6), printVal(7,6), printVal(8,6),
+    printVal(1,7), printVal(2,7), printVal(3,7), printVal(4,7), printVal(5,7), printVal(6,7), printVal(7,7), printVal(8,7),
+    printVal(1,8), printVal(2,8), printVal(3,8), printVal(4,8), printVal(5,8), printVal(6,8), printVal(7,8), printVal(8,8).
