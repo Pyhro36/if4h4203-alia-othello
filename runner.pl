@@ -25,39 +25,39 @@ play(Player) :-  write('New turn for:'), writeln(Player),
             play(NextPlayer). % next turn!
 
 %%%% Play a Move, add a case in the list of predicates
-playMove(X, Y, Player) :- assert(case(X, Y, Player)), .
+playMove(X, Y, Player) :- assert(case(X, Y, Player)), reverseGauche(X, Y, Player), reverseBasDroite(X, Y, Player).
 
 %%% reverse a case
 reverse(X, Y, Player) :- changePlayer(Player, OtherPlayer), retract(case(X,Y,OtherPlayer)), assert(case(X,Y,Player)).
 
-reverseGauche(X, Y, Player) :- case(X, Y, Player).
-reverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseGauche(X2, Y2, Player), reverse(X,Y,Player).
 
-reverseDroite(X, Y, Player) :- case(X, Y, Player).
-reverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseDroite(X2, Y2, Player), reverse(X,Y,Player).
+%%%% reverse all the cases à the left of the played case.
+reverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), case(X2, Y2, Player).
+reverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseGauche(X2, Y2, Player), reverse(X2,Y2,Player).
 
-reverseHaut(X, Y, Player) :- case(X, Y, Player).
-reverseHaut(X, Y, Player) :- contactHaut(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseHaut(X2, Y2, Player), reverse(X,Y,Player).
+reverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), case(X2, Y2, Player).
+reverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseDroite(X2, Y2, Player), reverse(X2,Y2,Player).
 
-reverseBas(X, Y, Player) :- case(X, Y, Player).
-reverseBas(X, Y, Player) :- contactBas(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseBas(X2, Y2, Player), reverse(X,Y,Player).
+reverseHaut(X, Y, Player) :- contactHaut(X, Y, X2, Y2), case(X2, Y2, Player).
+reverseHaut(X, Y, Player) :- contactHaut(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseHaut(X2, Y2, Player), reverse(X2,Y2,Player).
 
-reverseHautGauche(X, Y, Player) :- case(X, Y, Player).
-reverseHautGauche(X, Y, Player) :- contactHautGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseHautGauche(X2, Y2, Player), reverse(X,Y,Player).
+reverseBas(X, Y, Player) :- contactBas(X, Y, X2, Y2), case(X2, Y2, Player).
+reverseBas(X, Y, Player) :- contactBas(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseBas(X2, Y2, Player), reverse(X2,Y2,Player).
 
-reverseBasGauche(X, Y, Player) :- case(X, Y, Player).
-reverseBasGauche(X, Y, Player) :- contactBasGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseBasGauche(X2, Y2, Player), reverse(X,Y,Player).
+reverseHautGauche(X, Y, Player) :- contactHautGauche(X, Y, X2, Y2), case(X2, Y2, Player).
+reverseHautGauche(X, Y, Player) :- contactHautGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseHautGauche(X2, Y2, Player), reverse(X2,Y2,Player).
 
-reverseHautDroite(X, Y, Player) :- case(X, Y, Player).
-reverseHautDroite(X, Y, Player) :- contactHautDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseHautDroite(X2, Y2, Player), reverse(X,Y,Player).
+reverseBasGauche(X, Y, Player) :- contactBasGauche(X, Y, X2, Y2), case(X2, Y2, Player).
+reverseBasGauche(X, Y, Player) :- contactBasGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseBasGauche(X2, Y2, Player), reverse(X2,Y2,Player).
 
-reverseBasDroite(X, Y, Player) :- case(X, Y, Player).
-reverseBasDroite(X, Y, Player) :- contactBasDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X, Y, OtherPlayer), reverseBasDroite(X2, Y2, Player), reverse(X,Y,Player).
+reverseHautDroite(X, Y, Player) :- contactHautDroite(X, Y, X2, Y2), case(X2, Y2, Player).
+reverseHautDroite(X, Y, Player) :- contactHautDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseHautDroite(X2, Y2, Player), reverse(X2,Y2,Player).
 
+reverseBasDroite(X, Y, Player) :- contactBasDroite(X, Y, X2, Y2), case(X2, Y2, Player).
+reverseBasDroite(X, Y, Player) :- contactBasDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseBasDroite(X2, Y2, Player), reverse(X2,Y2,Player).
 
-init :- play()
-
+init :- play('n').
 
 %%%% Predicate to get the next player
-changePlayer('b',n').
+changePlayer('b','n').
 changePlayer('n','b').

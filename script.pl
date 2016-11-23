@@ -2,12 +2,10 @@
 
 :- consult(ihm).
 
-case(1,1,'b').
-case(1,2,'n').
-case(2,1,'n').
-case(2,2,'b').
-
-caseLibre(X2,Y2) :- case(X,Y,_), contact(X,Y,X2,Y2), not(case(X2,Y2,_)), X2 > 0, X2 < 9, Y2 > 0, Y2 < 9.
+case(4,4,'b').
+case(5,4,'n').
+case(4,5,'b').
+case(5,5,'b').
 
 contact(X,Y,X2,Y2) :- contactGauche(X,Y,X2,Y2).
 contact(X,Y,X2,Y2) :- contactDroite(X,Y,X2,Y2).
