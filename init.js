@@ -38,6 +38,8 @@ function init() {
 			coin = document.createElement("canvas");
 			coin.id = "coin" + j.toString() + i.toString();
 			coin.className = "coin";
+			coin.width = 50;
+			coin.height = 50;
 			//cell.appendChild(document.createTextNode(j.toString() + i.toString())); // debug
 			cell.appendChild(coin);
 			row.appendChild(cell);
