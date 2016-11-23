@@ -4,7 +4,7 @@
 
 case(4,4,'b').
 case(5,4,'n').
-case(4,5,'b').
+case(4,5,'n').
 case(5,5,'b').
 
 contact(X,Y,X2,Y2) :- contactGauche(X,Y,X2,Y2).
@@ -24,3 +24,5 @@ contactHautGauche(X,Y,X2,Y2) :- X2 is X-1, Y2 is Y-1.
 contactBasGauche(X,Y,X2,Y2) :- X2 is X-1, Y2 is Y+1.
 contactHautDroite(X,Y,X2,Y2) :- X2 is X+1, Y2 is Y-1.
 contactBasDroite(X,Y,X2,Y2) :- X2 is X+1, Y2 is Y+1.
+
+vide(X, Y) :- not(case(X,Y,_)).

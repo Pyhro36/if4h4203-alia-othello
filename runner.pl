@@ -19,42 +19,111 @@ play(_) :- equality, !, write('Game is Over. EQUALITY'), displayBoard.
 % The game is not over, we play the next turn
 play(Player) :-  write('New turn for:'), writeln(Player),
        	    displayBoard, % print it
-			ia(X, Y, Player), % ask the AI for a move, that is, an index for the Player 
+			iaRandome(X, Y, Player), % ask the AI for a move, that is, an index for the Player 
     	    playMove(X, Y, Player), % Play the move and get the result in a new Board
     	    changePlayer(Player,NextPlayer), % Change the player before next turn
             play(NextPlayer). % next turn!
 
 %%%% Play a Move, add a case in the list of predicates
-playMove(X, Y, Player) :- assert(case(X, Y, Player)), reverseGauche(X, Y, Player), reverseBasDroite(X, Y, Player).
+playMove(X, Y, Player) :- assert(case(X, Y, Player)), testReverseGauche(X, Y, Player), testReverseDroite(X, Y, Player), testReverseHaut(X, Y, Player), testReverseBas(X, Y, Player), testReverseHautGauche(X, Y, Player), testReverseHautDroite(X, Y, Player), testReverseBasGauche(X, Y, Player), testReverseBasDroite(X, Y, Player).
 
 %%% reverse a case
 reverse(X, Y, Player) :- changePlayer(Player, OtherPlayer), retract(case(X,Y,OtherPlayer)), assert(case(X,Y,Player)).
 
+%%%% test if reverse cases to the left
+testReverseGauche(X, Y, Player) :- reverseGauche(X, Y, Player).
+testReverseGauche(X, Y, Player) :- notReverseGauche(X, Y ,Player).
 
-%%%% reverse all the cases à the left of the played case.
+%%%% reverse the cases to the left.
 reverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseGauche(X2, Y2, Player), reverse(X2,Y2,Player).
+
+%%%% don't reverse the cases to the left.
+notReverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), vide(X2, Y2).
+notReverseGauche(X, Y, Player) :- contactGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), notReverseGauche(X2, Y2, Player).
+
+%%%% test if reverse cases to the right.
+testReverseDroite(X, Y, Player) :- reverseDroite(X, Y, Player).
+testReverseDroite(X, Y, Player) :- notReverseDroite(X, Y ,Player).
 
 reverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseDroite(X2, Y2, Player), reverse(X2,Y2,Player).
 
+%%%% don't reverse the cases to the right
+notReverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), vide(X2, Y2).
+notReverseDroite(X, Y, Player) :- contactDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), notReverseDroite(X2, Y2, Player).
+
+%%%% test if reverse cases to the up
+testReverseHaut(X, Y, Player) :- reverseHaut(X, Y, Player).
+testReverseHaut(X, Y, Player) :- notReverseHaut(X, Y ,Player).
+
+%%%% reverse the cases to the up
 reverseHaut(X, Y, Player) :- contactHaut(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseHaut(X, Y, Player) :- contactHaut(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseHaut(X2, Y2, Player), reverse(X2,Y2,Player).
 
+%%%% don't reverse the cases to the up
+notReverseHaut(X, Y, Player) :- contactHaut(X, Y, X2, Y2), vide(X2, Y2).
+notReverseHaut(X, Y, Player) :- contactHaut(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), notReverseHaut(X2, Y2, Player).
+
+%%%% test if reverse cases to the Down
+testReverseBas(X, Y, Player) :- reverseBas(X, Y, Player).
+testReverseBas(X, Y, Player) :- notReverseBas(X, Y ,Player).
+
+%%%% reverse the cases to the Down
 reverseBas(X, Y, Player) :- contactBas(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseBas(X, Y, Player) :- contactBas(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseBas(X2, Y2, Player), reverse(X2,Y2,Player).
 
+%%%% don't reverse the cases to the Down
+notReverseBas(X, Y, Player) :- contactBas(X, Y, X2, Y2), vide(X2, Y2).
+notReverseBas(X, Y, Player) :- contactBas(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), notReverseBas(X2, Y2, Player).
+
+%%%% test if reverse cases to the Up/Left
+testReverseHautGauche(X, Y, Player) :- reverseHautGauche(X, Y, Player).
+testReverseHautGauche(X, Y, Player) :- notReverseHautGauche(X, Y ,Player).
+
+%%%% reverse the cases to the Up/Left
 reverseHautGauche(X, Y, Player) :- contactHautGauche(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseHautGauche(X, Y, Player) :- contactHautGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseHautGauche(X2, Y2, Player), reverse(X2,Y2,Player).
 
+%%%% don't reverse the cases to the Up/Left
+notReverseHautGauche(X, Y, Player) :- contactHautGauche(X, Y, X2, Y2), vide(X2, Y2).
+notReverseHautGauche(X, Y, Player) :- contactHautGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), notReverseHautGauche(X2, Y2, Player).
+
+%%%% test if reverse cases to the Down/Left
+testReverseBasGauche(X, Y, Player) :- reverseBasGauche(X, Y, Player).
+testReverseBasGauche(X, Y, Player) :- notReverseBasGauche(X, Y ,Player).
+
+%%%% reverse the cases to the Down/Left
 reverseBasGauche(X, Y, Player) :- contactBasGauche(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseBasGauche(X, Y, Player) :- contactBasGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseBasGauche(X2, Y2, Player), reverse(X2,Y2,Player).
 
+%%%% don't reverse the cases to the Down/Left
+notReverseBasGauche(X, Y, Player) :- contactBasGauche(X, Y, X2, Y2), vide(X2, Y2).
+notReverseBasGauche(X, Y, Player) :- contactBasGauche(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), notReverseBasGauche(X2, Y2, Player).
+
+%%%% test if reverse cases to the Up/Right
+testReverseHautDroite(X, Y, Player) :- reverseHautDroite(X, Y, Player).
+testReverseHautDroite(X, Y, Player) :- notReverseHautDroite(X, Y ,Player).
+
+%%%% reverse the cases to the Up/Right
 reverseHautDroite(X, Y, Player) :- contactHautDroite(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseHautDroite(X, Y, Player) :- contactHautDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseHautDroite(X2, Y2, Player), reverse(X2,Y2,Player).
 
+%%%% don't reverse the cases to the Up/Right
+notReverseHautDroite(X, Y, Player) :- contactHautDroite(X, Y, X2, Y2), vide(X2, Y2).
+notReverseHautDroite(X, Y, Player) :- contactHautDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), notReverseHautDroite(X2, Y2, Player).
+
+%%%% test if reverse cases to the Down/Right
+testReverseBasDroite(X, Y, Player) :- reverseBasDroite(X, Y, Player).
+testReverseBasDroite(X, Y, Player) :- notReverseBasDroite(X, Y ,Player).
+
+%%%% reverse the cases to the Down/Right
 reverseBasDroite(X, Y, Player) :- contactBasDroite(X, Y, X2, Y2), case(X2, Y2, Player).
 reverseBasDroite(X, Y, Player) :- contactBasDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), reverseBasDroite(X2, Y2, Player), reverse(X2,Y2,Player).
+
+%%%% don't reverse the cases to the Down/Right
+notReverseBasDroite(X, Y, Player) :- contactBasDroite(X, Y, X2, Y2), vide(X2, Y2).
+notReverseBasDroite(X, Y, Player) :- contactBasDroite(X, Y, X2, Y2), changePlayer(Player, OtherPlayer), case(X2, Y2, OtherPlayer), notReverseBasDroite(X2, Y2, Player).
 
 init :- play('n').
 
