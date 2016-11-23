@@ -1,9 +1,17 @@
-:- consult(ia). %% consults also the ihm
+:- consult(iaScore).
+:- consult(iaRandom). %% consults also the ihm
+
+:- dynamic pass/1.
 
 %% to win, the player has to have more cases of his color than the other. %%
-winner('White') :- isBoardFull(WCases, BCases), WCases > BCases.
-winner('Black') :- isBoardFull(WCases, BCases), BCases > WCases.
+gameover(Winner) :- isBoardFull(WCases, BCases), winner(WCases, BCases, Winner).
+gameover(Winner) :- pass(2), onBoard(WCases, BCases), winner(WCases, BCases,Winner).
+
 equality :- isBoardFull(32, 32).
+equality :- pass(2), onBoard(WCases, BCases), WCases == BCases.
+
+winner(WCases, BCases, 'b') :- WCases > BCases.
+winner(WCases, BCases, 'n') :- BCases > WCases.
 
 %% test if the board is full and WCases are the number of cases for white player and idem BCases for black player %%
 isBoardFull(WCases, BCases) :- isBoardFull(1,1, WCases, BCases).
@@ -13,17 +21,40 @@ isBoardFull(X, Y, WCases, BCases) :- X < 8, case(X,Y,'n'), RX is X + 1, isBoardF
 isBoardFull(X, Y, WCases, BCases) :- X = 8, case(X,Y,'b'), RY is Y + 1, isBoardFull(1, RY, RWCases, BCases), WCases is RWCases + 1.
 isBoardFull(X, Y, WCases, BCases) :- X = 8, case(X,Y,'n'), RY is Y + 1, isBoardFull(1, RY, WCases, RBCases), BCases is RBCases + 1.
 
+onBoard(WCases, BCases) :- onBoard(1,1, WCases, BCases).
+onBoard(_, 9, 0, 0).
+onBoard(X, Y, WCases, BCases) :- X < 8, case(X,Y,'b'), RX is X + 1, onBoard(RX, Y, RWCases, BCases), WCases is RWCases + 1.
+onBoard(X, Y, WCases, BCases) :- X < 8, case(X,Y,'n'), RX is X + 1, onBoard(RX, Y, WCases, RBCases), BCases is RBCases + 1.
+onBoard(X, Y, WCases, BCases) :- X < 8, vide(X,Y), RX is X + 1, onBoard(RX, Y, WCases, BCases).
+onBoard(X, Y, WCases, BCases) :- X = 8, case(X,Y,'b'), RY is Y + 1, onBoard(1, RY, RWCases, BCases), WCases is RWCases + 1.
+onBoard(X, Y, WCases, BCases) :- X = 8, case(X,Y,'n'), RY is Y + 1, onBoard(1, RY, WCases, RBCases), BCases is RBCases + 1.
+onBoard(X, Y, WCases, BCases) :- X = 8, vide(X,Y), RY is Y + 1, onBoard(1, RY, WCases, BCases).
+
 % The game is over, we use a cut to stop the proof search, and display the winner.
-play(_) :- winner(Winner), !, write('Game is Over. Winner: '), writeln(Winner), displayBoard.
-play(_) :- equality, !, write('Game is Over. EQUALITY'), displayBoard.
+play(_) :- gameover(Winner), !. %% write('Game is Over. Winner: '), writeln(Winner), displayBoard.
+play(_) :- equality, !. %% write('Game is Over. EQUALITY'), displayBoard.
 % The game is not over, we play the next turn
-play(Player) :-  write('New turn for:'), writeln(Player),
-       	    displayBoard, % print it
-			iaRandome(X, Y, Player), % ask the AI for a move, that is, an index for the Player 
+play(Player) :-  %% write('New turn for:'), writeln(Player),
+			ia(X, Y, Player), % ask the AI for a move, that is, an index for the Player 
     	    playMove(X, Y, Player), % Play the move and get the result in a new Board
+			retractall(pass(_)),
+			assert(pass(0)).
+			%% displayBoard, % print it
     	    %% changePlayer(Player,NextPlayer), % Change the player before next turn
             %% play(NextPlayer). % next turn!
 
+play(Player) :-  %% write('New turn for:'), writeln(Player),
+			not(ia(X, Y, Player)), % ask the AI for a move, that is, an index for the Player 
+			%% displayBoard, % print it
+    	    %% changePlayer(Player,NextPlayer), % Change the player before next turn
+			pass(Passe),
+			Passe1 is Passe + 1,
+			retract(pass(Passe)),
+			assert(pass(Passe1)),
+            %% play(NextPlayer). % next turn!
+
+ia(X, Y, 'b') :- iaRandome(X, Y, 'b').
+ia(X, Y, 'n') :- iaScore(X, Y, 'n').
 %%%% Play a Move, add a case in the list of predicates
 playMove(X, Y, Player) :- assert(case(X, Y, Player)), testReverseGauche(X, Y, Player), testReverseDroite(X, Y, Player), testReverseHaut(X, Y, Player), testReverseBas(X, Y, Player), testReverseHautGauche(X, Y, Player), testReverseHautDroite(X, Y, Player), testReverseBasGauche(X, Y, Player), testReverseBasDroite(X, Y, Player).
 

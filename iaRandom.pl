@@ -46,4 +46,4 @@ scoreBasDroite(X,Y,P) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2
 pointsBasDroite(X,Y,P) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,P).
 pointsBasDroite(X,Y,P) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), pointsBasDroite(X2,Y2,P).
 
-randomMove(X,Y,P) :- findall([X2|Y2], caseJouable(X2,Y2,P), L), length(L,Size), random(0,Size,R), nth0(R,L,[X|Y]).
+randomMove(X,Y,P) :- findall([X2|Y2], caseJouable(X2,Y2,P), L), length(L,Size), Size > 0, random(0,Size,R), nth0(R,L,[X|Y]).

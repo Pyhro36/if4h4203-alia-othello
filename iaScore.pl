@@ -46,5 +46,5 @@ scoreBasDroiteScore(X,Y,P,S) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,_), not(
 pointsBasDroiteScore(X,Y,P,S,Score) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,P), S is Score.
 pointsBasDroiteScore(X,Y,P,S,Score) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score2 is Score+1, pointsBasDroiteScore(X2,Y2,P,S,Score2).
 
-randomizeScoreMove(X,Y,P) :- findall([X2|Y2], scoreMove(X2,Y2,P), L), length(L,Length), random(0,Length,Rand), nth0(Rand,L,[X|Y]).
+randomizeScoreMove(X,Y,P) :- findall([X2|Y2], scoreMove(X2,Y2,P), L), length(L,Length), Length > 0, random(0,Length,Rand), nth0(Rand,L,[X|Y]).
 scoreMove(X,Y,P) :- findall(S, caseJouableScore(X2,Y2,P,S), L1), findall([X2,Y2], caseJouableScore(X2,Y2,P,S), L2), max_member(Max,L1), nth0(Index,L1,Max), nth0(Index,L2,[X|[Y|_]]).
