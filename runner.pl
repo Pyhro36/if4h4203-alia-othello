@@ -50,7 +50,7 @@ play(Player) :-  %% write('New turn for:'), writeln(Player),
 			pass(Passe),
 			Passe1 is Passe + 1,
 			retract(pass(Passe)),
-			assert(pass(Passe1)),
+			assert(pass(Passe1)).
             %% play(NextPlayer). % next turn!
 
 ia(X, Y, 'b') :- iaRandome(X, Y, 'b').
