@@ -23,6 +23,6 @@ a {
 
 p#winner {
 	display: none;
-	margin: auto;
+	text-align: center;
 	font-size: 32pt;
 }

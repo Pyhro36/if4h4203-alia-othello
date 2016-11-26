@@ -6,7 +6,7 @@ function drawCell(x, y, color) {
 	
 	// Choose the color
 	if (color == 'n' ) {
-		drawContext.fillStyle = "#282828";
+		drawContext.fillStyle = "#2F2F2F";
 		drawContext.strokeStyle = "#000000";
 	} else if (color == 'b') {
 		drawContext.fillStyle = "#FFFFFF";

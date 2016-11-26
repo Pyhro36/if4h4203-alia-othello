@@ -42,10 +42,10 @@
 				document.getElementById("secondsNumber").display = "initial";
 				timerActive = false;
 			} else {
-				timer = setInterval(advanceState, document.getElementById("secondsNumber").value);
+				timer = setInterval(advanceState, document.getElementById("secondsNumber").value * 1000);
 				document.getElementById("playTimed").innerHTML = "Stop";
 				document.getElementById("secondsNumber").display = "none";
-				timerActive = false;
+				timerActive = true;
 			}
 		});
 		

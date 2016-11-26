@@ -31,3 +31,16 @@ printBoard :-
     printVal(1,6), printVal(2,6), printVal(3,6), printVal(4,6), printVal(5,6), printVal(6,6), printVal(7,6), printVal(8,6),
     printVal(1,7), printVal(2,7), printVal(3,7), printVal(4,7), printVal(5,7), printVal(6,7), printVal(7,7), printVal(8,7),
     printVal(1,8), printVal(2,8), printVal(3,8), printVal(4,8), printVal(5,8), printVal(6,8), printVal(7,8), printVal(8,8).
+
+
+% Display 'n' or 'b' if there's a winner, 'd' if it's a draw, or 'p' if we can still play.
+printResult :-
+	gameover(X),
+	write(X).
+printResult :-
+	equality,
+	write('d').
+printResult :-
+	not(gameover(_)),
+	not(equality),
+	write('p').
