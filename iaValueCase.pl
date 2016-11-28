@@ -1,3 +1,13 @@
+:- consult(script).
+
+% Method called for the I.A. based on each case value.
+
+% return the X and Y coordinates chosen by the player Player where he want to play.
+iaScore(X, Y, Player) :- scoreMove(X,Y,Player).
+
+
+% Facts for the dictionnary
+
 caseValue(1,1,10000).
 caseValue(1,2,-3000).
 caseValue(1,3,1000).
@@ -70,10 +80,18 @@ caseValue(8,6,1000).
 caseValue(8,7,-3000).
 caseValue(8,8,10000).
 
-% return the X and Y coordinates chosen y the player Player where he want to play.
-iaScore(X, Y, Player) :- randomizeScoreMove(X, Y, Player).
-
+% Check if there is no coins on the selected case
 caseLibre(X2,Y2) :- case(X,Y,_), contact(X,Y,X2,Y2), not(case(X2,Y2,_)), X2 > 0, X2 < 9, Y2 > 0, Y2 < 9.
+
+% Search the weight of a selected case
+scoreGauchePoids(X,Y,P,Poids) :- contactGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
+scoreDroitePoids(X,Y,P,Poids) :- contactDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
+scoreHautPoids(X,Y,P,Poids) :- contactHaut(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
+scoreBasPoids(X,Y,P,Poids) :- contactBas(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
+scoreHautGauchePoids(X,Y,P,Poids) :- contactHautGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
+scoreBasGauchePoids(X,Y,P,Poids) :- contactBasGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
+scoreHautDroitePoids(X,Y,P,Poids) :- contactHautDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
+scoreBasDroitePoids(X,Y,P,Poids) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
 
 caseJouablePoids(X,Y,P,Poids) :- caseLibre(X,Y), scoreGauchePoids(X,Y,P,Poids).
 caseJouablePoids(X,Y,P,Poids) :- caseLibre(X,Y), scoreDroitePoids(X,Y,P,Poids).
@@ -84,18 +102,5 @@ caseJouablePoids(X,Y,P,Poids) :- caseLibre(X,Y), scoreBasGauchePoids(X,Y,P,Poids
 caseJouablePoids(X,Y,P,Poids) :- caseLibre(X,Y), scoreHautDroitePoids(X,Y,P,Poids).
 caseJouablePoids(X,Y,P,Poids) :- caseLibre(X,Y), scoreBasDroitePoids(X,Y,P,Poids).
 
-scoreGauchePoids(X,Y,P,Poids) :- contactGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreDroitePoids(X,Y,P,Poids) :- contactDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreHautPoids(X,Y,P,Poids) :- contactHaut(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreBasPoids(X,Y,P,Poids) :- contactBas(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreHautGauchePoids(X,Y,P,Poids) :- contactHautGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreBasGauchePoids(X,Y,P,Poids) :- contactBasGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreHautDroitePoids(X,Y,P,Poids) :- contactHautDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreBasDroitePoids(X,Y,P,Poids) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-
-
-%A ECRIRE
-scoreMove(X,Y,P) :- findall(S, caseJouableScore(X2,Y2,P,S), L1), findall([X2,Y2], caseJouableScore(X2,Y2,P,S), L2), max_member(Max,L1), nth0(Index,L1,Max), nth0(Index,L2,[X|[Y|_]]).
-
-randomizeScoreMove(X,Y,P) :- findall([X2|Y2], scoreMove(X2,Y2,P), L), length(L,Length), random(0,Length,Rand), nth0(Rand,L,[X|Y]).
-scoreMove(X,Y,P) :- findall(S, caseJouableScore(X2,Y2,P,S), L1), findall([X2,Y2], caseJouableScore(X2,Y2,P,S), L2), max_member(Max,L1), nth0(Index,L1,Max), nth0(Index,L2,[X|[Y|_]]).
+scoreMove(X,Y,P) :- findall(S, caseJouablePoids(X2,Y2,P,S), L1), findall([X2,Y2], caseJouablePoids(X2,Y2,P,S), L2), max_member(Max,L1), nth0(Index,L1,Max), nth0(Index,L2,[X|[Y|_]]).
+% randomizeScoreMove(X,Y,P) :- findall([X2|Y2], scoreMove(X2,Y2,P), L), length(L,Length), random(0,Length,Rand), nth0(Rand,L,[X|Y]).
