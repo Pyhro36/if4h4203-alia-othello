@@ -3,7 +3,7 @@
 % Method called for the I.A. based on each case value.
 
 % return the X and Y coordinates chosen by the player Player where he want to play.
-iaScore(X, Y, Player) :- scoreMove(X,Y,Player).
+iaValueCase(X, Y, Player) :- scoreMove(X,Y,Player).
 
 
 % Facts for the dictionnary
@@ -84,14 +84,14 @@ caseValue(8,8,10000).
 caseLibre(X2,Y2) :- case(X,Y,_), contact(X,Y,X2,Y2), not(case(X2,Y2,_)), X2 > 0, X2 < 9, Y2 > 0, Y2 < 9.
 
 % Search the weight of a selected case
-scoreGauchePoids(X,Y,P,Poids) :- contactGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreDroitePoids(X,Y,P,Poids) :- contactDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreHautPoids(X,Y,P,Poids) :- contactHaut(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreBasPoids(X,Y,P,Poids) :- contactBas(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreHautGauchePoids(X,Y,P,Poids) :- contactHautGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreBasGauchePoids(X,Y,P,Poids) :- contactBasGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreHautDroitePoids(X,Y,P,Poids) :- contactHautDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
-scoreBasDroitePoids(X,Y,P,Poids) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y2,Poids).
+scoreGauchePoids(X,Y,P,Poids) :- contactGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X,Y,Poids).
+scoreDroitePoids(X,Y,P,Poids) :- contactDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X,Y,Poids).
+scoreHautPoids(X,Y,P,Poids) :- contactHaut(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X,Y,Poids).
+scoreBasPoids(X,Y,P,Poids) :- contactBas(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X,Y,Poids).
+scoreHautGauchePoids(X,Y,P,Poids) :- contactHautGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X,Y,Poids).
+scoreBasGauchePoids(X,Y,P,Poids) :- contactBasGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X2,Y,Poids).
+scoreHautDroitePoids(X,Y,P,Poids) :- contactHautDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X,Y,Poids).
+scoreBasDroitePoids(X,Y,P,Poids) :- contactBasDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), caseValue(X,Y,Poids).
 
 caseJouablePoids(X,Y,P,Poids) :- caseLibre(X,Y), scoreGauchePoids(X,Y,P,Poids).
 caseJouablePoids(X,Y,P,Poids) :- caseLibre(X,Y), scoreDroitePoids(X,Y,P,Poids).
