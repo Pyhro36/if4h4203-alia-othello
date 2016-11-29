@@ -1,5 +1,5 @@
 :- consult(iaScore).
-:- consult(iaRandome).
+:- consult(iaRandom).
 :- consult(iaValueCase). %% consults also the ihm
 
 :- dynamic pass/1.
@@ -55,9 +55,9 @@ play(Player) :-  %% write('New turn for:'), writeln(Player),
             %% play(NextPlayer). % next turn!
 
 			
-%%%% type of ia who play
-ia(X, Y, 'b') :- iaRandome(X, Y, 'b').
-ia(X, Y, 'n') :- iaScore(X, Y, 'n').
+%%%% type of ia who plays
+ia(X, Y, 'b') :- iaScore(X, Y, 'b').
+ia(X, Y, 'n') :- iaValueCase(X, Y, 'n').
 
 %%%% Play a Move, add a case in the list of predicates
 playMove(X, Y, Player) :- assert(case(X, Y, Player)), testReverseGauche(X, Y, Player), testReverseDroite(X, Y, Player), testReverseHaut(X, Y, Player), testReverseBas(X, Y, Player), testReverseHautGauche(X, Y, Player), testReverseHautDroite(X, Y, Player), testReverseBasGauche(X, Y, Player), testReverseBasDroite(X, Y, Player).

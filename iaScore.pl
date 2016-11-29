@@ -16,15 +16,15 @@ caseJouableScore(X,Y,P,S) :- caseLibre(X,Y), scoreBasDroiteScore(X,Y,P,S).
 
 scoreGaucheScore(X,Y,P,S) :- contactGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score is 1, pointsGaucheScore(X2,Y2,P,S,Score).
 pointsGaucheScore(X,Y,P,S,Score) :- contactGauche(X,Y,X2,Y2), case(X2,Y2,P), S is Score.
-pointsGaucheScore(X,Y,P,S,Score) :- contactGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score2 is Score+1, pointsGaucheScore(X2,Y2,P,S,Score2).
+pointsGaucheScore(X,Y,P,S,Score) :- contactGauche(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score2 is Score + 1, pointsGaucheScore(X2,Y2,P,S,Score2).
 
 scoreDroiteScore(X,Y,P,S) :- contactDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score is 1, pointsDroiteScore(X2,Y2,P,S,Score).
 pointsDroiteScore(X,Y,P,S,Score) :- contactDroite(X,Y,X2,Y2), case(X2,Y2,P), S is Score.
-pointsDroiteScore(X,Y,P,S,Score) :- contactDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score2 is Score+1, pointsDroiteScore(X2,Y2,P,S,Score2).
+pointsDroiteScore(X,Y,P,S,Score) :- contactDroite(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score2 is Score + 1, pointsDroiteScore(X2,Y2,P,S,Score2).
 
 scoreHautScore(X,Y,P,S) :- contactHaut(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score is 1, pointsHautScore(X2,Y2,P,S,Score).
 pointsHautScore(X,Y,P,S,Score) :- contactHaut(X,Y,X2,Y2), case(X2,Y2,P), S is Score.
-pointsHautScore(X,Y,P,S,Score) :- contactHaut(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score2 is Score+1, pointsHautScore(X2,Y2,P,S,Score2).
+pointsHautScore(X,Y,P,S,Score) :- contactHaut(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score2 is Score + 1, pointsHautScore(X2,Y2,P,S,Score2).
 
 scoreBasScore(X,Y,P,S) :- contactBas(X,Y,X2,Y2), case(X2,Y2,_), not(case(X2,Y2,P)), Score is 1, pointsBasScore(X2,Y2,P,S,Score).
 pointsBasScore(X,Y,P,S,Score) :- contactBas(X,Y,X2,Y2), case(X2,Y2,P), S is Score.
