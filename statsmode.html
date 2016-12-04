@@ -13,7 +13,7 @@
 		<a href="#" id="play">Play!</a>
 		
 		<br/>
-		<p id="messages">Cette page a besoin de JavaScript pour fonctionner. Si ce message ne disparaît pas rapidement, vérifiez que JavaScript est activé.</p>
+		<p id="messages">This page needs JavaScript to work properly. If this message doesn't quickly disappear, check that you have JavaScript enabled.</p>
 		
 		<h3>Results:</h3>
 		<table id="results">
@@ -63,8 +63,8 @@
 			</tr>
 		</table>
 		
-		<p>Total number of matches: <span>N/A</span></p>
-		<p>Total number of draws: <span>N/A</span></p>
+		<p>Total number of matches: <span id="t_matches">N/A</span></p>
+		<p>Total number of draws: <span id="t_draws">N/A</span></p>
 		
 		<hr/>
 		
@@ -75,9 +75,48 @@
 	<!-- Let's load the JS libraries! -->
 	<script src="stats.js" type="application/javascript"></script>
 	<script type="application/javascript">
-	window.onload = function() {
+	function processMatches() {
+		document.getElementById("messages").innerHTML = "Processing matches. Please wait.";
 		
-		document.getElementById("messages").innerHTML = "Prêt!"
+		var stats = playNMatches(document.getElementById("matchesNumber").value);
+		
+		document.getElementById("t_matches").innerHTML = stats.total.matches.toString();
+		document.getElementById("t_draws").innerHTML = (stats.total.matches - stats.b.victories - stats.n.victories).toString();
+		
+		document.getElementById("n_vic").innerHTML = matches.n.victories.toString();
+		document.getElementById("n_time").innerHTML = matches.n.time.toString();
+		document.getElementById("n_turns").innerHTML = matches.n.turns.toString();
+		document.getElementById("n_score").innerHTML = matches.n.score.toString();
+		document.getElementById("n_avg_timeperturn").innerHTML = (matches.n.time / matches.n.turns).toString();
+		document.getElementById("n_avg_timepermatch").innerHTML = (matches.n.time / matches.t.matches).toString();
+		document.getElementById("n_avg_scorepermatch").innerHTML = (matches.n.score / matches.t.matches).toString();
+		document.getElementById("n_avg_turnspermatch").innerHTML = (matches.n.turns / matches.t.matches).toString();
+		
+		document.getElementById("b_vic").innerHTML = matches.b.victories.toString();
+		document.getElementById("b_time").innerHTML = matches.b.time.toString();
+		document.getElementById("b_turns").innerHTML = matches.b.turns.toString();
+		document.getElementById("b_score").innerHTML = matches.b.score.toString();
+		document.getElementById("b_avg_timeperturn").innerHTML = (matches.b.time / matches.b.turns).toString();
+		document.getElementById("b_avg_timepermatch").innerHTML = (matches.b.time / matches.t.matches).toString();
+		document.getElementById("b_avg_scorepermatch").innerHTML = (matches.b.score / matches.t.matches).toString();
+		document.getElementById("b_avg_turnspermatch").innerHTML = (matches.b.turns / matches.t.matches).toString();
+		
+		document.getElementById("t_vic").innerHTML = (matches.b.victories + matches.n.victories).toString();
+		document.getElementById("t_time").innerHTML = matches.t.time.toString();
+		document.getElementById("t_turns").innerHTML = matches.t.turns.toString();
+		document.getElementById("t_score").innerHTML = matches.t.score.toString();
+		document.getElementById("t_avg_timeperturn").innerHTML = (matches.t.time / matches.t.turns).toString();
+		document.getElementById("t_avg_timepermatch").innerHTML = (matches.t.time / matches.t.matches).toString();
+		document.getElementById("t_avg_scorepermatch").innerHTML = (matches.t.score / matches.t.matches).toString();
+		document.getElementById("t_avg_turnspermatch").innerHTML = (matches.t.turns / matches.t.matches).toString();
+		
+		document.getElementById("messages").innerHTML = "Done!";
+	}
+	
+	
+	window.onload = function() {
+		document.getElementById("play").addEventListener("click", processMatches);
+		document.getElementById("messages").innerHTML = "Ready!";
 	}
 	</script>
 </html>
