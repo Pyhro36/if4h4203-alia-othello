@@ -5,7 +5,66 @@
 		<link rel="stylesheet" type="text/css" href="othello.css">
 	</head>
 	<body>
+		<h1>Othello Stats Mode</h1>
 		
+		<h3>Settings:</h3>
+		<p>Play N matches:</p>
+		<input type="number" id="matchesNumber" min="1" value="1"/><br/>
+		<a href="#" id="play">Play!</a>
+		
+		<br/>
+		<p id="messages">Cette page a besoin de JavaScript pour fonctionner. Si ce message ne disparaît pas rapidement, vérifiez que JavaScript est activé.</p>
+		
+		<h3>Results:</h3>
+		<table id="results">
+			<tr class="sep">
+				<th>Player</th>
+				<th>Victories Count</th>
+				<th>Total play time</th>
+				<th>Total number of turns</th>
+				<th>Total score</th>
+				<th>Average time spent on turn</th>
+				<th>Average time spent on match</th>
+				<th>Average score on match</th>
+				<th>Average turns on match</th>
+			</tr>
+			<tr class="sep">
+				<th>Black<br/>Square Value AI</th>
+				<td id="n_vic">N/A</td>
+				<td id="n_time">N/A</td>
+				<td id="n_turns">N/A</td>
+				<td id="n_score">N/A</td>
+				<td id="n_avg_timeperturn">N/A</td>
+				<td id="n_avg_timepermatch">N/A</td>
+				<td id="n_avg_scorepermatch">N/A</td>
+				<td id="n_avg_turnspermatch">N/A</td>
+			</tr>
+			<tr class="sep">
+				<th>White<br/>Score AI</th>
+				<td id="b_vic">N/A</td>
+				<td id="b_time">N/A</td>
+				<td id="b_turns">N/A</td>
+				<td id="b_score">N/A</td>
+				<td id="b_avg_timeperturn">N/A</td>
+				<td id="b_avg_timepermatch">N/A</td>
+				<td id="b_avg_scorepermatch">N/A</td>
+				<td id="b_avg_turnspermatch">N/A</td>
+			</tr>
+			<tr class="sep">
+				<th>Total counts</th>
+				<td id="t_vic">N/A</td>
+				<td id="t_time">N/A</td>
+				<td id="t_turns">N/A</td>
+				<td id="t_score">N/A</td>
+				<td id="t_avg_timeperturn">N/A</td>
+				<td id="t_avg_timepermatch">N/A</td>
+				<td id="t_avg_scorepermatch">N/A</td>
+				<td id="t_avg_turnspermatch">N/A</td>
+			</tr>
+		</table>
+		
+		<p>Total number of matches: <span>N/A</span></p>
+		<p>Total number of draws: <span>N/A</span></p>
 		
 		<hr/>
 		
@@ -15,4 +74,10 @@
 	
 	<!-- Let's load the JS libraries! -->
 	<script src="stats.js" type="application/javascript"></script>
+	<script type="application/javascript">
+	window.onload = function() {
+		
+		document.getElementById("messages").innerHTML = "Prêt!"
+	}
+	</script>
 </html>

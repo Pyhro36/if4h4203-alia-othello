@@ -7,14 +7,31 @@ table#board {
 	margin: auto
 }
 
+table#results {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-collapse: collapse;
+	border-width: 1px;
+	border-style: solid;
+}
+
 canvas.coin {
 	width: 50px;
 	height: 50px;
 }
 
+table#results th, table#results td {
+	text-align: left;
+	padding: 5px;
+	border-top: 1px solid black;
+}
+
 .cell {
 	border-width: 1px;
 	border-style: solid;
+	text-align: center;
 }
 
 a {
@@ -25,4 +42,8 @@ p#winner {
 	display: none;
 	text-align: center;
 	font-size: 32pt;
+}
+
+p#messages {
+	font-style: italic;
 }
