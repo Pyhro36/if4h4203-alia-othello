@@ -146,3 +146,4 @@ test(vide) :-
 
 		
 :- end_tests(script).
+:- show_coverage(run_tests).
