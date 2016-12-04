@@ -160,6 +160,10 @@ function playNMatches (n) {
 	var match;
 	
 	for (var i = 0; i < n; i++) {
+		if (window.onmatchupdate) {
+			window.onmatchupdate(i+1);
+		}
+		
 		match = statsMatch();
 		
 		if (!match.success) continue;
