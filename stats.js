@@ -1,5 +1,4 @@
 function playOne() {
-	if (gameover) return;
 	var start = 0, stop = 0;
 	var r = {};
 	var xhr = new XMLHttpRequest();
@@ -112,12 +111,12 @@ function statsMatch() {
 		} else  {
 			r.b.turns++;
 			r.b.time += turn.time;
-			blackPlays = false;
+			blackPlays = true;
 		}
 		r.total.turns++;
 		r.total.time += turn.time;
 		
-	} while (!(turn.gameover || turn.success));
+	} while (!turn.gameover );
 	
 	r.draw = turn.draw;
 	r.winner = turn.winner;
@@ -131,14 +130,14 @@ function statsMatch() {
 	}
 	r.b.score = turn.b;
 	r.n.score = turn.n;
-	r.total.score = turn.b + turn.r;
+	r.total.score = turn.b + turn.n;
 	
 	return r;
 }
 
 function playNMatches (n) {
 	var r = {
-		total: {
+		t: {
 			matches: 0,
 			turns: 0,
 			time: 0,
@@ -165,22 +164,22 @@ function playNMatches (n) {
 		
 		if (!match.success) continue;
 		
-		r.total.matches++;
+		r.t.matches++;
 		if (match.winner == "n") {
 			r.n.victories++;
 		} else if (match.winner == "b") {
 			r.b.victories++;
 		}
 		
-		r.total.turns += match.total.turns;
+		r.t.turns += match.total.turns;
 		r.n.turns += match.n.turns;
 		r.b.turns += match.b.turns;
 		
-		r.total.time += match.total.time;
+		r.t.time += match.total.time;
 		r.n.time += match.n.time;
 		r.b.time += match.b.time;
 		
-		r.total.score += match.total.score;
+		r.t.score += match.total.score;
 		r.n.score += match.n.score;
 		r.b.score += match.b.score;
 	}

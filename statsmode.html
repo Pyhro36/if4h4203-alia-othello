@@ -80,35 +80,35 @@
 		
 		var stats = playNMatches(document.getElementById("matchesNumber").value);
 		
-		document.getElementById("t_matches").innerHTML = stats.total.matches.toString();
-		document.getElementById("t_draws").innerHTML = (stats.total.matches - stats.b.victories - stats.n.victories).toString();
+		document.getElementById("t_matches").innerHTML = stats.t.matches.toString();
+		document.getElementById("t_draws").innerHTML = (stats.t.matches - stats.b.victories - stats.n.victories).toString();
 		
-		document.getElementById("n_vic").innerHTML = matches.n.victories.toString();
-		document.getElementById("n_time").innerHTML = matches.n.time.toString();
-		document.getElementById("n_turns").innerHTML = matches.n.turns.toString();
-		document.getElementById("n_score").innerHTML = matches.n.score.toString();
-		document.getElementById("n_avg_timeperturn").innerHTML = (matches.n.time / matches.n.turns).toString();
-		document.getElementById("n_avg_timepermatch").innerHTML = (matches.n.time / matches.t.matches).toString();
-		document.getElementById("n_avg_scorepermatch").innerHTML = (matches.n.score / matches.t.matches).toString();
-		document.getElementById("n_avg_turnspermatch").innerHTML = (matches.n.turns / matches.t.matches).toString();
+		document.getElementById("n_vic").innerHTML = stats.n.victories.toString();
+		document.getElementById("n_time").innerHTML = stats.n.time.toString();
+		document.getElementById("n_turns").innerHTML = stats.n.turns.toString();
+		document.getElementById("n_score").innerHTML = stats.n.score.toString();
+		document.getElementById("n_avg_timeperturn").innerHTML = (stats.n.time / stats.n.turns).toString();
+		document.getElementById("n_avg_timepermatch").innerHTML = (stats.n.time / stats.t.matches).toString();
+		document.getElementById("n_avg_scorepermatch").innerHTML = (stats.n.score / stats.t.matches).toString();
+		document.getElementById("n_avg_turnspermatch").innerHTML = (stats.n.turns / stats.t.matches).toString();
 		
-		document.getElementById("b_vic").innerHTML = matches.b.victories.toString();
-		document.getElementById("b_time").innerHTML = matches.b.time.toString();
-		document.getElementById("b_turns").innerHTML = matches.b.turns.toString();
-		document.getElementById("b_score").innerHTML = matches.b.score.toString();
-		document.getElementById("b_avg_timeperturn").innerHTML = (matches.b.time / matches.b.turns).toString();
-		document.getElementById("b_avg_timepermatch").innerHTML = (matches.b.time / matches.t.matches).toString();
-		document.getElementById("b_avg_scorepermatch").innerHTML = (matches.b.score / matches.t.matches).toString();
-		document.getElementById("b_avg_turnspermatch").innerHTML = (matches.b.turns / matches.t.matches).toString();
+		document.getElementById("b_vic").innerHTML = stats.b.victories.toString();
+		document.getElementById("b_time").innerHTML = stats.b.time.toString();
+		document.getElementById("b_turns").innerHTML = stats.b.turns.toString();
+		document.getElementById("b_score").innerHTML = stats.b.score.toString();
+		document.getElementById("b_avg_timeperturn").innerHTML = (stats.b.time / stats.b.turns).toString();
+		document.getElementById("b_avg_timepermatch").innerHTML = (stats.b.time / stats.t.matches).toString();
+		document.getElementById("b_avg_scorepermatch").innerHTML = (stats.b.score / stats.t.matches).toString();
+		document.getElementById("b_avg_turnspermatch").innerHTML = (stats.b.turns / stats.t.matches).toString();
 		
-		document.getElementById("t_vic").innerHTML = (matches.b.victories + matches.n.victories).toString();
-		document.getElementById("t_time").innerHTML = matches.t.time.toString();
-		document.getElementById("t_turns").innerHTML = matches.t.turns.toString();
-		document.getElementById("t_score").innerHTML = matches.t.score.toString();
-		document.getElementById("t_avg_timeperturn").innerHTML = (matches.t.time / matches.t.turns).toString();
-		document.getElementById("t_avg_timepermatch").innerHTML = (matches.t.time / matches.t.matches).toString();
-		document.getElementById("t_avg_scorepermatch").innerHTML = (matches.t.score / matches.t.matches).toString();
-		document.getElementById("t_avg_turnspermatch").innerHTML = (matches.t.turns / matches.t.matches).toString();
+		document.getElementById("t_vic").innerHTML = (stats.b.victories + stats.n.victories).toString();
+		document.getElementById("t_time").innerHTML = stats.t.time.toString();
+		document.getElementById("t_turns").innerHTML = stats.t.turns.toString();
+		document.getElementById("t_score").innerHTML = stats.t.score.toString();
+		document.getElementById("t_avg_timeperturn").innerHTML = (stats.t.time / stats.t.turns).toString();
+		document.getElementById("t_avg_timepermatch").innerHTML = (stats.t.time / stats.t.matches).toString();
+		document.getElementById("t_avg_scorepermatch").innerHTML = (stats.t.score / stats.t.matches).toString();
+		document.getElementById("t_avg_turnspermatch").innerHTML = (stats.t.turns / stats.t.matches).toString();
 		
 		document.getElementById("messages").innerHTML = "Done!";
 	}

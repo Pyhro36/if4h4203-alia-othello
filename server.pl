@@ -25,7 +25,7 @@ switchPlayer :-
 %%% Define HTTP handlers
 :- http_handler('/', http_reply_file('index.html', []), []).
 :- http_handler('/index.html', http_reply_file('index.html', []), []).
-:- http_handler('/index.html', http_reply_file('statsmode.html', []), []).
+:- http_handler('/statsmode.html', http_reply_file('statsmode.html', []), []).
 :- http_handler('/othello.css', http_reply_file('othello.css', []), []).
 :- http_handler('/init.js', http_reply_file('init.js', []), []).
 :- http_handler('/draw.js', http_reply_file('draw.js', []), []).
@@ -34,7 +34,7 @@ switchPlayer :-
 :- http_handler('/getBoard', getBoardHttpHandler, []).
 :- http_handler('/play', playHandler, []).
 :- http_handler('/playNTimes', playSeveralHandler, []).
-:- http_handler('/resetboard', resetBoard, []).
+:- http_handler('/resetboard', resetBoardHandler, []).
 
 %%% The startup predicates
 server(Port) :- http_server(http_dispatch, [port(Port)]).
@@ -78,6 +78,12 @@ playSeveralHandler(Request) :- % Play N times and we can play
 	format('Content-type: text/plain~n~n'),
 	printResult.
 
+resetBoardHandler(_Request) :- 
+	resetBoard,
+	retractall(currentPlayer(_)),
+	assert(currentPlayer('n')),
+	retractall(pass(_)),
+	format('Content-type: text/plain~n~n').
 
 %The stop conditions for the N turns loop
 playNTimes(0).
