@@ -4,9 +4,10 @@
 case(1,1,'b').
 case(2,1,'n').
 case(3,1,'b').
-case(4,1,'b').
-case(5,1,'b').
-case(6,1,'b').
+case(4,1,'n').
+case(5,1,'n').
+case(6,1,'n').
+case(7,1,'n').
 case(8,1,'b').
 
 case(1,2,'b').
@@ -29,7 +30,9 @@ case(8,3,'b').
 
 case(1,4,'b').
 case(2,4,'n').
-case(3,4,'b').
+case(3,4,'n').
+case(4,4,'b').
+case(5,4,'n').
 case(6,4,'b').
 case(7,4,'n').
 case(8,4,'b').
@@ -37,6 +40,8 @@ case(8,4,'b').
 case(1,5,'b').
 case(2,5,'n').
 case(3,5,'b').
+case(4,5,'n').
+case(5,5,'b').
 case(6,5,'b').
 case(7,5,'n').
 case(8,5,'b').
@@ -53,7 +58,7 @@ case(8,6,'b').
 case(1,7,'b').
 case(2,7,'n').
 case(3,7,'b').
-case(4,7,'b').
+case(4,7,'n').
 case(5,7,'n').
 case(6,7,'n').
 case(7,7,'n').
@@ -66,6 +71,7 @@ case(4,8,'n').
 case(5,8,'n').
 case(6,8,'b').
 case(7,8,'b').
+case(8,8,'b').
 
 :- dynamic case/3.
 %%case(8,8,'b').
