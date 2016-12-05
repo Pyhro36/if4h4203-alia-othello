@@ -20,6 +20,12 @@
 		
 		<p><a href="#" id="playTimed">Play every N seconds&nbsp;:</a> <input type="number" id="secondsNumber" min="1" value="1"/></p>
 		
+		<p><a href="#" id="reset">Reset Board</a></p>
+		
+		<br/>
+		
+		<p><a href="statsmode.html">Stats Mode</a></p>
+		
 	</body>
 	
 	<!-- Let's load the JS libraries! -->
@@ -47,6 +53,13 @@
 				document.getElementById("secondsNumber").display = "none";
 				timerActive = true;
 			}
+		});
+		
+		document.getElementById("reset").addEventListener("click", function() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "resetboard", false);
+			xhr.send(null);
+			displayBoard();
 		});
 		
 		window.onload = function() {
