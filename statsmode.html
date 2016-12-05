@@ -92,7 +92,7 @@
 			document.getElementById("n_time").innerHTML = stats.n.time.toString() + " ms";
 			document.getElementById("n_turns").innerHTML = stats.n.turns.toString();
 			document.getElementById("n_score").innerHTML = stats.n.score.toString();
-			document.getElementById("n_avg_timeperturn").innerHTML = (stats.n.time / stats.n.turns).toString() + " ms";
+			document.getElementById("n_avg_timeperturn").innerHTML = (stats.n.time / stats.n.turns).toString().substring(0,6) + " ms";
 			document.getElementById("n_avg_timepermatch").innerHTML = (stats.n.time / stats.t.matches).toString() + " ms";
 			document.getElementById("n_avg_scorepermatch").innerHTML = (stats.n.score / stats.t.matches).toString();
 			document.getElementById("n_avg_turnspermatch").innerHTML = (stats.n.turns / stats.t.matches).toString();
@@ -101,7 +101,7 @@
 			document.getElementById("b_time").innerHTML = stats.b.time.toString() + " ms";
 			document.getElementById("b_turns").innerHTML = stats.b.turns.toString();
 			document.getElementById("b_score").innerHTML = stats.b.score.toString();
-			document.getElementById("b_avg_timeperturn").innerHTML = (stats.b.time / stats.b.turns).toString() + " ms";
+			document.getElementById("b_avg_timeperturn").innerHTML = (stats.b.time / stats.b.turns).toString().substring(0,6) + " ms";
 			document.getElementById("b_avg_timepermatch").innerHTML = (stats.b.time / stats.t.matches).toString() + " ms";
 			document.getElementById("b_avg_scorepermatch").innerHTML = (stats.b.score / stats.t.matches).toString();
 			document.getElementById("b_avg_turnspermatch").innerHTML = (stats.b.turns / stats.t.matches).toString();
