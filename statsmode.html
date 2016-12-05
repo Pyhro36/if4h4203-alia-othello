@@ -110,7 +110,7 @@
 			document.getElementById("t_time").innerHTML = stats.t.time.toString() + " ms";
 			document.getElementById("t_turns").innerHTML = stats.t.turns.toString();
 			document.getElementById("t_score").innerHTML = stats.t.score.toString();
-			document.getElementById("t_avg_timeperturn").innerHTML = (stats.t.time / stats.t.turns).toString() + " ms";
+			document.getElementById("t_avg_timeperturn").innerHTML = (stats.t.time / stats.t.turns).toString().substring(0,6) + " ms";
 			document.getElementById("t_avg_timepermatch").innerHTML = (stats.t.time / stats.t.matches).toString() + " ms";
 			document.getElementById("t_avg_scorepermatch").innerHTML = (stats.t.score / stats.t.matches).toString();
 			document.getElementById("t_avg_turnspermatch").innerHTML = (stats.t.turns / stats.t.matches).toString();
