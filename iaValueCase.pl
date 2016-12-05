@@ -4,7 +4,7 @@
 % Method called for the I.A. based on each case value.
 
 % return the X and Y coordinates chosen by the player Player where he want to play.
-iaValueCase(X, Y, Player) :- valueMove(X,Y,Player).
+iaValueCase(X, Y, Player) :- randomizeValueMove(X,Y,Player).
 
 % Facts for the dictionnary
 
@@ -103,7 +103,7 @@ caseJouablePoids(X,Y,P,Poids) :- caseLibreVal(X,Y), scoreHautDroitePoids(X,Y,P,P
 caseJouablePoids(X,Y,P,Poids) :- caseLibreVal(X,Y), scoreBasDroitePoids(X,Y,P,Poids).
 
 valueMove(X,Y,P) :- findall(S, caseJouablePoids(X2,Y2,P,S), L1), findall([X2,Y2], caseJouablePoids(X2,Y2,P,S), L2), max_member(Max,L1), nth0(Index,L1,Max), nth0(Index,L2,[X|[Y|_]]).
-% randomizeScoreMove(X,Y,P) :- findall([X2|Y2], scoreMove(X2,Y2,P), L), length(L,Length), random(0,Length,Rand), nth0(Rand,L,[X|Y]).
+randomizeValueMove(X,Y,P) :- findall([X2|Y2], valueMove(X2,Y2,P), L), length(L,Length), random(0,Length,Rand), nth0(Rand,L,[X|Y]).
 
 % TESTS
 
